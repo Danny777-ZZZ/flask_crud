@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flask CRUD</title>
+  <style>
+    body { font-family: Arial; max-width: 500px; margin: 40px auto; }
+    input { padding: 6px; margin: 4px; }
+    button { padding: 6px 12px; cursor: pointer; }
+    li { margin: 8px 0; display: flex; gap: 8px; align-items: center; }
+  </style>
+</head>
+<body>
+  <h2>📝 Flask CRUD</h2>
+
+  <!-- ADD -->
+  <form action="/add" method="post">
+    <input name="name" placeholder="Enter item..." required>
+    <button type="submit">➕ Add</button>
+  </form>
+
+  <hr>
+
+  <!-- LIST + EDIT + DELETE -->
+  <ul>
+    {% for id, name in items.items() %}
+    <li>
+      <form action="/edit/{{ id }}" method="post" style="display:flex; gap:4px;">
+        <input name="name" value="{{ name }}" required>
+        <button type="submit">✏️</button>
+      </form>
+      <a href="/delete/{{ id }}"><button>🗑️</button></a>
+    </li>
+    {% else %}
+    <p>No items yet!</p>
+    {% endfor %}
+  </ul>
+</body>
+</html>
